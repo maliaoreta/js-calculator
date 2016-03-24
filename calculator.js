@@ -1,3 +1,10 @@
+/**
+ * Declare a function named `calculatorModule`
+ * this function will have two private variables declared inside of it.
+ * @variable PRIVATE { Number } `memory`
+ * @variable PRIVATE { Number } `total`
+ * @return {object} `calculator` object that can be used
+ */
 var calculatorModule = function(){
   var _memory = 0;
   var _total = 0;

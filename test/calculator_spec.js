@@ -224,7 +224,85 @@ describe('calculatorModule', function () {
     // Tests for validations
     describe('Validations', function () {
 
-    });
+      it('private variables are not on the global namespace', function () {
 
+        expect(GLOBAL.total).to.be.undefined;
+        expect(GLOBAL.memory).to.be.undefined;
+      });
+
+      it('private variables are not exposed by a calculator object', function () {
+        
+        expect(calcModule.total).to.be.undefined;
+        expect(calcModule.memory).to.be.undefined;
+      });
+
+      it('If any calculator function is given a non-number data type as an argument, display an error message as a string', function () {
+
+        // Tests load validation
+        describe('#load', function () {
+          it('pass validations', function () {
+
+            // Couldn't get test to work without bind
+            expect(calcModule.load.bind(calcModule, '')).to.throw('Needs a number!');
+            expect(calcModule.load.bind(calcModule, [])).to.throw('Needs a number!');
+            expect(calcModule.load.bind(calcModule, {})).to.throw('Needs a number!');
+            expect(calcModule.load.bind(calcModule, null)).to.throw('Needs a number!');
+            expect(calcModule.load.bind(calcModule, function () {})).to.throw('Needs a number!');
+          });
+        });
+
+        // Tests add validation
+        describe('#add', function () {
+
+          it('pass validations', function () {
+
+            expect(calcModule.add.bind(calcModule, '')).to.throw('Needs a number!');
+            expect(calcModule.add.bind(calcModule, [])).to.throw('Needs a number!');
+            expect(calcModule.add.bind(calcModule, {})).to.throw('Needs a number!');
+            expect(calcModule.add.bind(calcModule, null)).to.throw('Needs a number!');
+            expect(calcModule.add.bind(calcModule, function () {})).to.throw('Needs a number!');
+          })
+        })
+
+        // Tests subtract validation
+        describe('#subtract', function () {
+
+          it('pass validations', function () {
+
+            expect(calcModule.subtract.bind(calcModule, '')).to.throw('Needs a number!');
+            expect(calcModule.subtract.bind(calcModule, [])).to.throw('Needs a number!');
+            expect(calcModule.subtract.bind(calcModule, {})).to.throw('Needs a number!');
+            expect(calcModule.subtract.bind(calcModule, null)).to.throw('Needs a number!');
+            expect(calcModule.subtract.bind(calcModule, function () {})).to.throw('Needs a number!');
+          })
+        })
+
+        //Tests multiply validation
+        describe('#multiply', function () {
+
+          it('pass validations', function () {
+
+            expect(calcModule.multiply.bind(calcModule, '')).to.throw('Needs a number!');
+            expect(calcModule.multiply.bind(calcModule, [])).to.throw('Needs a number!');
+            expect(calcModule.multiply.bind(calcModule, {})).to.throw('Needs a number!');
+            expect(calcModule.multiply.bind(calcModule, null)).to.throw('Needs a number!');
+            expect(calcModule.multiply.bind(calcModule, function () {})).to.throw('Needs a number!');
+          })
+        })
+
+        //Tests divide validation
+        describe('#divide', function () {
+
+          it('pass validations', function () {
+
+            expect(calcModule.divide.bind(calcModule, '')).to.throw('Needs a number!');
+            expect(calcModule.divide.bind(calcModule, [])).to.throw('Needs a number!');
+            expect(calcModule.divide.bind(calcModule, {})).to.throw('Needs a number!');
+            expect(calcModule.divide.bind(calcModule, null)).to.throw('Needs a number!');
+            expect(calcModule.divide.bind(calcModule, function () {})).to.throw('Needs a number!');
+          })
+        })
+      });
+    });
   });
 });

@@ -1,3 +1,9 @@
+
+  var addFunc = require("./calc-modules/add.js");
+  var subFunc = require("./calc-modules/subtract.js");
+  var multFunc = require("./calc-modules/multiply.js");
+  var divFunc = require("./calc-modules/divide.js");
+
 /**
  * Declare a function named `calculatorModule`
  * this function will have two private variables declared inside of it.
@@ -6,94 +12,102 @@
  * @return {object} `calculator` object that can be used
  */
 var calculatorModule = function(){
-  var _memory = 0;
-  var _total = 0;
-  var error = new Error('Needs a number!');
+  var _calc = {
+    memory : 0,
+    total : 0
+  };
+var err = new Error('Needs a number!');
+
+
+  // var _memory = 0;
+  // var _total = 0;
+  
 
   // Loads total's initial value to value that is passed in
-  function setTotal(num){
+  function load(num){
     if(typeof(num)==='number'){
-    _total = num;
-    return _total;
+    _calc.total = num;
+    return _calc.total;
     }
     else{
-      throw error;
+      throw err;
     }
   }
 
   // Returns the value stored in total
   function getTotal(){
-    return _total;
+    return _calc.total;
   }
+
 
   // Adds the passed in number to the current total
-  function add(num){
-    if(typeof(num)==='number'){
-    _total += num;
-    return _total;
-    }
-    else{
-      throw error;
-    }
-  }
+  // function add(num){
+  //   if(typeof(num)==='number'){
+  //   _total += num;
+  //   return _total;
+  //   }
+  //   else{
+  //     throw error;
+  //   }
+  // }
 
   // Subtracts passed in number from total
-  function subtract(num){
-    if(typeof(num)==='number'){
-    _total -= num;
-    return _total;
-    }
-    else{
-      throw error;
-    }
-  }
+  // function subtract(num){
+  //   if(typeof(num)==='number'){
+  //   _total -= num;
+  //   return _total;
+  //   }
+  //   else{
+  //     throw error;
+  //   }
+  // }
 
   // Multiplies passed in number by total
-  function multiply(num){
-    if(typeof(num)==='number'){
-    _total *= num;
-    return _total;
-    }
-    else{
-      throw error;
-    }
-  }
+  // function multiply(num){
+  //   if(typeof(num)==='number'){
+  //   _total *= num;
+  //   return _total;
+  //   }
+  //   else{
+  //     throw err;
+  //   }
+  // }
 
   // Divides total by number passed in
-  function divides(num){
-    if(typeof(num)==='number'){
-    _total /= num;
-    return _total;
-    }
-    else{
-      throw error;
-    }
-  }
+  // function divides(num){
+  //   if(typeof(num)==='number'){
+  //   _total /= num;
+  //   return _total;
+  //   }
+  //   else{
+  //     throw err;
+  //   }
+  // }
 
   // Returns value currently stored in memory
   function recallMemory(){
-    return _memory;
+    return _calc.memory;
   }
 
   // Saves the value of total  into memory
   function saveMemory(){
-    _memory = _total;
-    return _memory;
+    _calc.memory = _calc.total;
+    return _calc.memory;
   }
 
   // Clear memory
   function clearMemory(){
-    _memory = 0;
-    return _memory;
+    _calc.memory = 0;
+    return _calc.memory;
   }
 
   return {
-    load : setTotal,
+    load : load,
     getTotal: getTotal,
-    add: add,
-    subtract : subtract,
-    multiply : multiply,
-    divide : divides,
+    add: addFunc(_calc, err),
+    subtract : subFunc(_calc, err),
+    multiply : multFunc(_calc, err),
+    divide : divFunc(_calc, err),
     recallMemory : recallMemory,
     saveMemory : saveMemory,
     clearMemory : clearMemory
@@ -101,6 +115,9 @@ var calculatorModule = function(){
 
 
 };
+
+
+module.exports = calculatorModule;
 
   /**
    * sets the `total` to the number passed in
